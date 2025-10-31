@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import backendUrl from '../App'
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const backendUrl = "http://localhost:3000"; // your backend
+  // const {backendUrl} = ; // your backend
   const currency = "$";
 
   // Fetch orders
