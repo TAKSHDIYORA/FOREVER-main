@@ -124,7 +124,7 @@ const fetchCartFromDB = async (email) => {
     try {
             const token = localStorage.getItem('token');
 
-      const res = await axios.post(`http://localhost:3000/api/cart/${encodeURIComponent(email)}`,{},{headers:{token:token,},});
+      const res = await axios.post(backendUrl+`/api/cart/${encodeURIComponent(email)}`,{},{headers:{token:token,},});
       // console.log(res);
       if (res.data.status && res.data.cartData) {
         setCartItems(res.data.cartData);
@@ -153,7 +153,7 @@ const fetchCartFromDB = async (email) => {
     };
     console.log("📦 Sending payload to backend:", payload);
 
-    const res = await axios.post(`http://localhost:3000/api/cart/save`, payload, {
+    const res = await axios.post(backendUrl+`/api/cart/save`, payload, {
     headers: {
     token: token, // 👈 this line is important
   }
