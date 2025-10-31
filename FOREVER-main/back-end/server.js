@@ -15,7 +15,18 @@ const PORT = process.env.PORT || 4000;
 connectCloudinary();
 //middlewares
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://forever-admin-zeta-one.vercel.app", // your admin frontend
+      "https://forever-frontend.vercel.app",       // (if you have client site)
+      "http://localhost:3000"                      // for local testing
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
+    credentials: true,
+  })
+);
 // api endpoints 
 app.use('/api/user',userRouter);
 app.use('/api/product',productRouter);
