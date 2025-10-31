@@ -15,11 +15,7 @@ const PORT = process.env.PORT || 4000;
 connectCloudinary();
 //middlewares
 app.use(express.json());
-app.use(cors({
-  origin: "https://forever-front-end-zeta.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+app.use(cors());
 // api endpoints 
 app.use('/api/user',userRouter);
 app.use('/api/product',productRouter);
