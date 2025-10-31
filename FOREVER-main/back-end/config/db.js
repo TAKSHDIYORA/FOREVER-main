@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-mongoose.connect("mongodb+srv://24ceuos030_db_user:RN78hYSRUvwPVDlE@e-commerce.oabfxlc.mongodb.net/").then(()=>{
+mongoose.connect("mongodb+srv://24ceuos030_db_user:RN78hYSRUvwPVDlE@e-commerce.oabfxlc.mongodb.net/test").then(()=>{
     console.log("connected to database");
     
 }).catch((err)=>{console.log(err);}
