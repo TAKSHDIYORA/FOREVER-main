@@ -1,42 +1,45 @@
-import express from 'express'
-import cors from 'cors'
-import 'dotenv/config'
-import mongoose  from './config/db.js'
-import connectCloudinary from './config/cloudinary.js'
-import userRouter from './routes/userRoutes.js'
-import productRouter from './routes/productRoutes.js'
-import cartRouter from './routes/cartRoutes.js'
-import orderRouter from './routes/orderRoute.js'
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import mongoose from "./config/db.js";
+import connectCloudinary from "./config/cloudinary.js";
+import userRouter from "./routes/userRoutes.js";
+import productRouter from "./routes/productRoutes.js";
+import cartRouter from "./routes/cartRoutes.js";
+import orderRouter from "./routes/orderRoute.js";
 
-// App Config
+// Initialize App
+const app = express();
 
-const app = express()
-const PORT = process.env.PORT || 4000;
+// Connect Cloudinary
 connectCloudinary();
-//middlewares
+
+// Middleware
 app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://forever-admin-zeta-one.vercel.app", // your admin frontend
-      "https://forever-frontend.vercel.app",       // (if you have client site)
-      "http://localhost:3000"                      // for local testing
+      "https://forever-admin-zeta-one.vercel.app", // Admin frontend
+      "https://forever-frontend.vercel.app",       // Client site (if any)
+      "http://localhost:3000",                     // Local testing
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "token"],
-    credentials: true,
   })
 );
-// api endpoints 
-app.use('/api/user',userRouter);
-app.use('/api/product',productRouter);
-app.use('/api/cart',cartRouter);
-app.use('/api/order',orderRouter);
-app.get('/',(req,res)=>{
-     res.send("API WORKING")
+
+// Manually handle preflight OPTIONS
+app.options("*", cors());
+
+// Routes
+app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
+
+app.get("/", (req, res) => {
+  res.send("✅ API is working perfectly!");
 });
 
-app.listen(PORT,()=>{
-    console.log("server is running on PORT :" + PORT);
-    
-});
+// ✅ Export app instead of app.listen()
+export default app;
