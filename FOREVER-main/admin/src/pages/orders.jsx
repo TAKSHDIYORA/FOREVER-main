@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import backendUrl from '../App'
+import {backendUrl} from '../App'
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   // const {backendUrl} = ; // your backend
